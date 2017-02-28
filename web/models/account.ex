@@ -19,8 +19,14 @@ defmodule GuardianPhoenix.Account do
     |> put_pass_hash
   end
 
+
+  def find_by_email(email) do
+    from a in __MODULE__,
+    where: a.email == ^email
+  end
+
   defp put_pass_hash(changeset) do
     password = changeset.changes.password
-    put_change(changeset, :password_digest, String.reverse(password))
+    put_change(changeset, :password_digest, Comeonin.Bcrypt.hashpwsalt(password))
   end
 end
