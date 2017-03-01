@@ -2,6 +2,8 @@ defmodule GuardianPhoenix.ArticleController do
   use GuardianPhoenix.Web, :controller
 
   alias GuardianPhoenix.Article
+  plug Guardian.Plug.EnsureAuthenticated, [handler: GuardianPhoenix.GuardianErrorHandler]  when action in [:create]
+  plug :scrub_params, "article" when action in [:create, :update]
 
   def index(conn, _params) do
     articles = Repo.all(Article)

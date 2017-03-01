@@ -36,6 +36,7 @@ defmodule GuardianPhoenix.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:gettext, "~> 0.11"},
      {:comeonin, "~> 2.4"},
+     {:guardian, "~> 0.14.2"},
      {:cowboy, "~> 1.0"}]
   end
 
