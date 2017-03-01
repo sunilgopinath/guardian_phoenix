@@ -5,6 +5,7 @@ defmodule GuardianPhoenix.Account do
     field :email, :string
     field :password_digest, :string
     field :password, :string, virtual: true
+    has_many :articles, GuardianPhoenix.Article
 
     timestamps()
   end

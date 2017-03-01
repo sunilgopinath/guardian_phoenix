@@ -16,7 +16,9 @@ defmodule GuardianPhoenix.ArticleController do
   # end
   #
   def create(conn, %{"article" => article_params}) do
-    changeset = Article.changeset(%Article{}, article_params)
+    account = Guardian.Plug.current_resource(conn) # <- New line
+    article = Ecto.build_assoc(account, :articles)
+    changeset = Article.changeset(article, article_params)
 
     case Repo.insert(changeset) do
       {:ok, article} ->
